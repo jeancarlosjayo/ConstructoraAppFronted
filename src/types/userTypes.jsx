@@ -1,0 +1,7 @@
+export const LOGIN_USER = "LOGIN_USER"
+
+export const LOGOUT_USER = 'LOGOUT_USER'
+
+export const ADD_UID_USER = 'ADD_UID_USER'
+
+export const ADD_OTHERDATOS_USER = 'ADD_OTHERDATOS_USER'

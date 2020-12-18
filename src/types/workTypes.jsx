@@ -1,0 +1,7 @@
+export const STEPONE_WORK = "STEPONE_WORK"
+
+export const STEPTWO_WORK = 'STEPTWO_WORK'
+
+export const STEPTHREE_WORK = 'STEPTHREE_WORK'
+
+// export const ADD_OTHERDATOS_USER = 'ADD_OTHERDATOS_USER'
