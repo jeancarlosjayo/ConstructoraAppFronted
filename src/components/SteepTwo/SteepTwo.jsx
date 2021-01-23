@@ -37,6 +37,7 @@ const SteepTwo = ({handleNext}) => {
     }
 
     const getValue = (e) =>{
+        console.log(e.target.value)
         const exist = workers.obreros.some(item => item === e.target.value)
         const existname = workers.obrerosname.some(item => item === e.target.name)
 
@@ -44,18 +45,17 @@ const SteepTwo = ({handleNext}) => {
             const filter = workers.obreros.filter(item => item !== e.target.value)
             const filtername = workers.obrerosname.filter(item => item !== e.target.name)
             setworkers({
-                obreros:filter
-            })
-            setworkers({
+                ...workers,
+                obreros:filter,
                 obrerosname:filtername
             })
 
         }else{
             setworkers({
-                obreros:[...workers.obreros,e.target.value]
-            })
-            setworkers({
-                obrerosname:[...workers.obreros,e.target.name]
+                ...workers,
+                obreros:[...workers.obreros,e.target.value],
+                obrerosname:[...workers.obrerosname,e.target.name]
+
             })
         }             
     }
@@ -69,7 +69,7 @@ const SteepTwo = ({handleNext}) => {
             payload:{
                 workers: workers.obreros,
                 workersname: workers.obrerosname,
-                totalday: workers.obreros.length
+                totalworkers: workers.obreros.length
             }
         })
         handleNext()
@@ -96,6 +96,8 @@ const SteepTwo = ({handleNext}) => {
         })
     }, [])
 
+
+    console.log(data.datos)
     return (
         <div>
             <Typography variant="h5" color="initial">Lista de obreros</Typography>

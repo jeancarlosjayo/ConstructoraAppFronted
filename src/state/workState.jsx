@@ -8,5 +8,5 @@ export const workState = {
     workersname:[],
     emailreport:'',
     workris:'',
-    totalday:null
+    totalworkers:null
 }

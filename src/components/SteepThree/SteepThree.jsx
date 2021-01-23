@@ -5,9 +5,11 @@ import React, { useEffect, useState } from 'react'
 import firebase from 'firebase/app';
 import "firebase/auth";
 import "firebase/database"
+import { workContext } from '../../context/workContext';
+import { STEPTHREE_WORK } from '../../types/workTypes';
 
 
-const SteepThree = () => {
+const SteepThree = ({handleNext}) => {
 
 
     const [data, setdata] = useState({
@@ -29,6 +31,7 @@ const SteepThree = () => {
 
 
     const handleChange = (e) =>{
+        console.log(e.target.name)
         setInfo({
             ...info,
             [e.target.name]:e.target.value
@@ -58,10 +61,17 @@ const SteepThree = () => {
         })
     }, [])
 
+    const {dispatchwork} = React.useContext(workContext)
+
     const handleEnvio = () => {
-
-
-
+        dispatchwork({
+            type: STEPTHREE_WORK,
+            payload:{
+                workris: info.dniris,
+                emailreport: info.emailreport
+            }
+        })
+        handleNext()
     }
 
     console.log(info)
@@ -89,21 +99,21 @@ const SteepThree = () => {
                 <Grid item xs={12} md={12} sm={12}>
                     <FormControl variant="outlined" fullWidth={true}>
                         <InputLabel id="demo-simple-select-outlined-label">
-                            Tipo de documento
+                            Encargado de Asistencia
                         </InputLabel>
                         <Select
                             value={info.dniris}
                             onChange={handleChange}
-                            label="Tipo de documento"
+                            label="Encargado de Asistencia"
                             name="dniris"
                         >
                             <MenuItem value="">
-                            <em>Escoger tipo de documento</em>
+                            <em>Escoger encargado</em>
                             </MenuItem>
                             {
                                data.datos.map((item,index) => {
                                 return(
-                                    <MenuItem value={item.numberdoc} key={index}>{item.name}</MenuItem>
+                                    <MenuItem value={item.numberdoc} key={index} >{item.name}</MenuItem>
                                 )
                                }) 
                             }

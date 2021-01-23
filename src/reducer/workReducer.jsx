@@ -20,14 +20,14 @@ const  workReducer  = (state = {}, action) => {
                  ...state,
                  workers: action.payload.workers,
                  workersname: action.payload.workersname,
-                 totalday: action.payload.totalday,
+                 totalworkers: action.payload.totalworkers,
                     
             }
         case STEPTHREE_WORK:
             return{
                 ...state,
                 workris: action.payload.workris,
-                totalday: action.payload.totalday,
+                emailreport: action.payload.emailreport,
             }
         
         default :

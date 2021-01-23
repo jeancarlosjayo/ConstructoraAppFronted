@@ -2,12 +2,11 @@ import React from 'react';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
 import { useStylesSteppers } from './Steppers.css';
 import SteepOne from '../SteepOne/SteepOne';
 import SteepTwo from '../SteepTwo/SteepTwo';
 import SteepThree from '../SteepThree/SteepThree';
+import SteepComplete from '../SteepComplete/SteepComplete';
 
 
 
@@ -25,7 +24,7 @@ const getStepContent = (stepIndex,handleNext,handleBack) => {
     case 1:
       return <SteepTwo handleNext={handleNext} handleBack={handleBack}></SteepTwo>;
     case 2:
-      return <SteepThree handleNext={handleNext} handleBack={handleBack}></SteepThree>;
+      return <SteepThree handleNext={handleNext} handleBack={handleBack} ></SteepThree>;
     default:
       return 'Unknown stepIndex';
   }
@@ -62,11 +61,8 @@ const Steppers = () => {
     </div>
       <div>
         {activeStep === steps.length ? (
-          <div>
-            <Typography className={classes.instructions}>All steps completed</Typography>
-            <Button onClick={handleReset}>Reset</Button>
-          </div>
-        ) : (
+          <SteepComplete handleReset={handleReset}></SteepComplete>
+          ) : (
           <div>
             {getStepContent(activeStep,handleNext,handleBack)}
           </div>

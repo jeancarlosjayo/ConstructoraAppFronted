@@ -65,7 +65,7 @@ const FormLogin = () => {
                 const type = (snapshot.val() && snapshot.val().type) ;
                 const name = (snapshot.val() && snapshot.val().name) ;
                 const email = (snapshot.val() && snapshot.val().email) ;
-                console.log(type)
+                console.log('tipo usser',type)
                 dispatch({
                     type:ADD_OTHERDATOS_USER,
                     payload:{
@@ -80,7 +80,6 @@ const FormLogin = () => {
                 })
                 
             })
-            
             .catch((error)=>{
                 console.log(error)
                 
