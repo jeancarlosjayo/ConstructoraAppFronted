@@ -110,7 +110,7 @@ const Menu = ( props) => {
             )
           }
 
-{
+          {
             type === "ris"&&
             (
             <>
@@ -131,7 +131,54 @@ const Menu = ( props) => {
             )
           }
 
+{
+            type === "superadmin"&&
+            (
+            <>
+            <Link to="/lista-obras" className={classes.link}>
+            <ListItem button>
+              <ListItemIcon className={classes.listicon}>
+                <BuildIcon
+                  style={{ marginRight: "3px" }}
+                  color="secondary"
+                ></BuildIcon>
+              </ListItemIcon>
+              <Typography variant="h6" color="secondary">
+                Lista de Obras
+              </Typography>
+            </ListItem>
+          </Link>
 
+          <Link to="/codigo-activacion" className={classes.link}>
+            <ListItem button>
+              <ListItemIcon className={classes.listicon}>
+                <PostAddIcon
+                  style={{ marginRight: "3px" }}
+                  color="secondary"
+                ></PostAddIcon>
+              </ListItemIcon>
+              <Typography variant="h6" color="secondary">
+                Codigos de Activacion
+              </Typography>
+            </ListItem>
+          </Link>
+
+          <Link to="/codigo-extension" className={classes.link}>
+            <ListItem button>
+              <ListItemIcon className={classes.listicon}>
+                <GroupIcon
+                  style={{ marginRight: "3px" }}
+                  color="secondary"
+                ></GroupIcon>
+              </ListItemIcon>
+              <Typography variant="h6" color="secondary">
+                Codigos de Extension
+              </Typography>
+            </ListItem>
+          </Link>
+          </>
+            )
+          }
           
         </List>
       </>

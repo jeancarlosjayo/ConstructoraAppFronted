@@ -79,18 +79,18 @@ const FormWorker = () => {
       //   }
       // })
       
-      firebase.database().ref('/obreros/' + worker.numberdoc).set({
-        typedoc: worker.typedoc,
-        dayborn: getDateFormat(worker.dayborn),
-        dni: worker.numberdoc,
-        name : worker.name,
-        lastname: worker.lastname,
-        obraid:'',
-        category:worker.category,
-        status:worker.status
-      }).catch(error =>{
-        console.log(error)
-      })
+      // firebase.database().ref('/obreros/' + worker.numberdoc).set({
+      //   typedoc: worker.typedoc,
+      //   dayborn: getDateFormat(worker.dayborn),
+      //   dni: worker.numberdoc,
+      //   name : worker.name,
+      //   lastname: worker.lastname,
+      //   obraid:'',
+      //   category:worker.category,
+      //   status:worker.status
+      // }).catch(error =>{
+      //   console.log(error)
+      // })
       
       
       
@@ -148,7 +148,7 @@ const FormWorker = () => {
                             "aria-label": "change date",
                             }}
                         />
-                      </MuiPickersUtilsProvider>  
+              </MuiPickersUtilsProvider>  
             </Grid>
         </Grid>
         <Grid container spacing={2} style={{padding:'15px 0px'}}>

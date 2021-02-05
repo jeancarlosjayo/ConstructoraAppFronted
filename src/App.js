@@ -7,7 +7,7 @@ import { workContext } from './context/workContext'
 import userReducer from './reducer/userReducer'
 import { userState } from './state/userState'
 import Home from './views/Home'
-import { CssBaseline, ThemeProvider } from '@material-ui/core'
+import { CssBaseline, Dialog, ThemeProvider } from '@material-ui/core'
 
 import theme from './themeGlobal'
 import Login from './views/Login'
@@ -17,8 +17,13 @@ import Appbar from './components/Appbar/Appbar'
 import Drawe from './components/Drawe/Drawe'
 import Reportes from './views/Reportes'
 import Worker from './views/Worker'
+import Work from './views/Work'
+import CodeActivation from './views/CodeActivation'
+import CodeExtension from './views/CodeExtension'
+
 import { workState } from './state/workState'
 import workReducer from './reducer/workReducer'
+import ObraExcel from './views/ObraExcel'
 
   const App = () => {
 
@@ -37,6 +42,12 @@ import workReducer from './reducer/workReducer'
 
   const [ open, setOpen ] = useState( false )
 
+ 
+  window.onbeforeunload = function() {
+    return "Leaving this page will reset the wizard";
+  };
+
+
   return (
     <ThemeProvider theme={theme}>
     <CssBaseline>
@@ -48,6 +59,7 @@ import workReducer from './reducer/workReducer'
             !userinit.isLogged &&
             <Switch>
               <Route exact path="/login" component={Login}></Route>
+              <Route exact path="/descargarobraexcel/:id" component={ObraExcel}></Route>
               <Redirect to="/login"></Redirect>
             </Switch>
           }
@@ -79,6 +91,24 @@ import workReducer from './reducer/workReducer'
             <Switch>
               <Route exact path="/ris" component={RIS}></Route>
               <Redirect to="/ris"></Redirect>
+            </Switch>
+            <Drawe
+            open={open}
+            setOpen={setOpen}></Drawe>
+            </div>
+          }
+          {
+            userinit.isLogged && userinit.type === "superadmin" &&
+            <div>
+             <Appbar
+              open={open}
+              setOpen={setOpen}>
+             </Appbar> 
+            <Switch>
+              <Route exact path="/lista-obras" component={Work}></Route>
+              <Route exact path="/codigo-activacion" component={CodeActivation}></Route>
+              <Route exact path="/codigo-extension" component={CodeExtension}></Route>
+              <Redirect to="/lista-obras"></Redirect>
             </Switch>
             <Drawe
             open={open}
