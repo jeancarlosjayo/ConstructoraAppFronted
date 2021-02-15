@@ -19,6 +19,7 @@ const StyledTableCell = withStyles((theme) => ({
   
   const StyledTableRow = withStyles((theme) => ({
     root: {
+      fontFamily: "'Open Sans', 'Helvetica', 'Arial', sans-serif",
       "&:nth-of-type(odd)": {
         backgroundColor: theme.palette.action.hover,
       },
@@ -30,16 +31,24 @@ const StyledTableCell = withStyles((theme) => ({
     id,
     name,
     state,
-    stateampliation,
+    // stateampliation,
     codeaccess,
-    codeampliation,
-    timestart,
-    timefinish,
+    // codeampliation,
+    // timestart,
+    // timefinish,
     datestart,
     datefinished,
-    admin
+    // admin
   ) {
-    return { id, name, state, stateampliation, codeaccess, codeampliation, timestart,timefinish,datestart,datefinished,admin };
+    return { id, name, state, 
+      // stateampliation, 
+      codeaccess, 
+      // codeampliation, 
+      // timestart,
+      // timefinish,
+      datestart,datefinished,
+      // admin 
+    };
   }
   
   //Ascendente y descendente de la tabla
@@ -74,14 +83,14 @@ const StyledTableCell = withStyles((theme) => ({
     {id: "id",numeric: true,disablePadding: false,label: "Id Obra"},
     {id: "name",numeric: true,disablePadding: false,label: "Nombre"},
     { id: "state", numeric: false, disablePadding: false, label: "Estado Activación" },
-    { id: "stateampliation", numeric: false, disablePadding: false, label: "Estado Ampliación" },
+    // { id: "stateampliation", numeric: false, disablePadding: false, label: "Estado Ampliación" },
     { id: "codeaccess", numeric: false, disablePadding: false, label: "Codigo Activacón" },
-    { id: "codeampliation", numeric: false, disablePadding: false, label: "Codigo Ampliación" },
-    { id: "timestart", numeric: false, disablePadding: false, label: "Hora Entrada" },
-    { id: "timefinish", numeric: false, disablePadding: false, label: "Hora Salida" },
+    // { id: "codeampliation", numeric: false, disablePadding: false, label: "Codigo Ampliación" },
+    // { id: "timestart", numeric: false, disablePadding: false, label: "Hora Entrada" },
+    // { id: "timefinish", numeric: false, disablePadding: false, label: "Hora Salida" },
     { id: "datestart", numeric: false, disablePadding: false, label: "Fecha Inicio" },
     { id: "datefinished", numeric: false, disablePadding: false, label: "Fecha Fin" },
-    { id: "admin", numeric: false, disablePadding: false, label: "Admin" },
+    // { id: "admin", numeric: false, disablePadding: false, label: "Admin" },
 
 
   ];
@@ -133,7 +142,7 @@ const TableWork = ({data}) => {
         const [order, setOrder] = React.useState("asc");
         const [orderBy, setOrderBy] = React.useState("calories");
         const [page, setPage] = React.useState(0);
-        const [rowsPerPage, setRowsPerPage] = React.useState(5);
+        const [rowsPerPage, setRowsPerPage] = React.useState(10);
       
         //handle change
         const handleRequestSort = (event, property) => {
@@ -173,13 +182,13 @@ const TableWork = ({data}) => {
       
     return (
           <div>
-            <Paper className={classes.paper}>
-              <TableContainer className={classes.tableContainerStyle}>
+            <Paper className={classes.paper} >
+              <TableContainer className={classes.tableContainerStyle} >
                 <Table
                   className={classes.table}
                   aria-labelledby="tableTitle"
                   aria-label="enhanced table"
-                  id="pdfdiv"
+                  // id="pdfdiv"
                 >
                   <EnhancedTableHead
                     classes={classes}
@@ -211,30 +220,30 @@ const TableWork = ({data}) => {
                             <StyledTableCell align="center">
                               {row.state}
                             </StyledTableCell>
-                            <StyledTableCell align="center">
+                            {/* <StyledTableCell align="center">
                               {row.stateampliation}
-                            </StyledTableCell>
+                            </StyledTableCell> */}
                             <StyledTableCell align="center">
                               {row.codeaccess}
                             </StyledTableCell>
-                            <StyledTableCell align="center">
+                            {/* <StyledTableCell align="center">
                               {row.codeampliation}
-                            </StyledTableCell>
-                            <StyledTableCell align="center">
+                            </StyledTableCell> */}
+                            {/* <StyledTableCell align="center">
                               {row.timestart}
                             </StyledTableCell>
                             <StyledTableCell align="center">
                               {row.timefinish}
-                            </StyledTableCell>
+                            </StyledTableCell> */}
                             <StyledTableCell align="center">
                               {row.datestart}
                             </StyledTableCell>
                             <StyledTableCell align="center">
                               {row.datefinished}
                             </StyledTableCell>
-                            <StyledTableCell align="center">
+                            {/* <StyledTableCell align="center">
                               {row.admin}
-                            </StyledTableCell>
+                            </StyledTableCell> */}
                           </StyledTableRow>
                         );
                       })}
@@ -248,7 +257,7 @@ const TableWork = ({data}) => {
                 </Table>
               </TableContainer>
               <TablePagination
-                rowsPerPageOptions={[5, 10, 25]}
+                rowsPerPageOptions={[10, 20, 30]}
                 labelRowsPerPage="Filas por Página"
                 component="div"
                 count={sales1.length}

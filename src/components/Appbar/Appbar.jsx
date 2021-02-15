@@ -1,27 +1,21 @@
 import {
     AppBar,
-    IconButton,
+    Button,
     Toolbar,
     Typography,
 }from "@material-ui/core";
 import React , { useContext }from "react";
-import MenuIcon from "@material-ui/icons/Menu";
-import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import { useStylesAppbar } from "./Appbar.css";
 import { userContext } from "../../context/userContext";
 import { LOGOUT_USER } from "../../types/userTypes"
-  
+import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
+
     const Appbar = (props) => {
 
-    const { open, setOpen } = props;
 
     const classes =  useStylesAppbar();
 
     const { dispatch } = useContext(userContext)
-  
-    const handleOpen = () => {
-      setOpen(true);
-    };
 
     const handleLogout = () => {
       dispatch({
@@ -32,22 +26,31 @@ import { LOGOUT_USER } from "../../types/userTypes"
   
     return (
       <div className={classes.root}>
-        <AppBar position="static" color="secondary" className={classes.appbar}>
+        <AppBar position="static" color="primary" className={classes.appbar}>
           <Toolbar>
-            <IconButton color="inherit" aria-label="menu" onClick={handleOpen}>
-              <MenuIcon />
-            </IconButton>
-            <Typography variant="h3" className={classes.title} style={{marginLeft:'10px'}}>
-                <div className={classes.banner_title}>
-                        <Typography className={classes.logo_title}>Constructora</Typography>
-                        <Typography 
-                        className={classes.logo_title}
-                        style={{textAlign:'end'}}>Futuro</Typography>
-                </div>
+            <div className={classes.title} style={{marginLeft:'10px'}}>
+            <Typography style={{marginRight:5}} variant="h5">
+                App 
             </Typography>
-            <IconButton color="inherit" onClick={handleLogout} >
-              <ExitToAppIcon></ExitToAppIcon>
-            </IconButton>
+            <Typography variant="h5" color="secondary">
+                 Constructora 
+            </Typography>
+            </div>
+            <Typography variant="h5" style={{marginRight:25}}>
+                 Obras
+            </Typography>
+            <Typography variant="h5" style={{marginRight:25}}>
+                 Codigo de Activación 
+            </Typography>
+            <Typography variant="h5" style={{marginRight:25}}>
+                 Codigo de Extensión 
+            </Typography>
+            <Button color="inherit" onClick={handleLogout} style={{textTransform:'initial'}}>
+              <Typography variant="h5" style={{marginRight:5}} >
+                  Cerrar Sesión
+              </Typography>
+            <PowerSettingsNewIcon/>
+            </Button>
           </Toolbar>
         </AppBar>
       </div>

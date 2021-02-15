@@ -4,10 +4,10 @@ import { createMuiTheme } from "@material-ui/core/styles";
 const themeGlobal = createMuiTheme({
     palette:{
         primary:{
-            main:'#0237a0'
+            main:'#122555'
         },
         secondary:{
-            main:'#ffffff'
+            main:'#F57E21'
         },
         background:{
             paper:'#ffffff',
@@ -27,8 +27,16 @@ const themeGlobal = createMuiTheme({
         }
     },
     typography:{
-        fontFamily:"'Quantico', 'Helvetica', 'Arial', sans-serif"
-        
+        // fontFamily:"'Quantico', 'Helvetica', 'Arial', sans-serif",
+        // fontFamily: "'Boogaloo', cursive",
+        fontFamily: "'Open Sans', 'Helvetica', 'Arial', sans-serif",
+        h3:{
+             fontFamily: "'Boogaloo', cursive",
+        },
+        h5:{
+            fontFamily: "'Boogaloo', cursive",
+       }
+
     },
 });
 

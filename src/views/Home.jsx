@@ -42,24 +42,33 @@ const Home = () => {
         console.log('sadsad',json);
         let newjson
         for( const item of json){
-            const fecha = item['FECHA NACIMIENTO'] ? toStringDate(new Date((item['FECHA NACIMIENTO'] - (25567 + 1))*86400*1000)): ''
+            const fecha = item['FECHA DE NACIMIENTO'] ? toStringDate(new Date((item['FECHA DE NACIMIENTO'] - (25567 + 1))*86400*1000)): ''
             const fechapuesto = item['FECHA INICIO PUESTO'] ? toStringDate(new Date((item['FECHA INICIO PUESTO'] - (25567 + 1))*86400*1000)): ''
-            const dni = item['NRODOC'] ? item['NRODOC']: ''
-            console.log(item['NRODOC'].toString() )
+            const fechacese = item['FECHA DE CESE EN OBRA'] ? toStringDate(new Date((item['FECHA DE CESE EN OBRA'] - (25567 + 1))*86400*1000)): ''
+            const dniexce = item['FECHA DE VENCIMIENTO DEL DNI'] ? toStringDate(new Date((item['FECHA DE VENCIMIENTO DEL DNI'] - (25567 + 1))*86400*1000)): ''
+            const nrodoc = item['DNI'] ? item['DNI'] : ''
+            const ruc = item['RUC'] ? item['RUC'] : ''
+            console.log(nrodoc )
             newjson ={
-                charge: item['CARGO'] ? item['CARGO'] : '',
+                charge: item['OCUPACION'] ? item['OCUPACION'] : '',
                 category: item['CATEGORIA'] ? item['CATEGORIA'] : '',
-                datestart: fechapuesto,
+                payroll: item['PLANILLA'] ? item['PLANILLA'] : '',
+                // datestart: fechapuesto,
                 dayborn:fecha,
-                names:item['NOMBRES'] ? item['NOMBRES'] : '',
-                lastnamefirst: item['PRIMER APELLIDO'] ? item['PRIMER APELLIDO'] : '',
-                lastnamesecond: item['SEGUNDO APELLIDO'] ? item['SEGUNDO APELLIDO'] : '',
-                typedoc:item['TIPODOC'] ? item['TIPODOC'] : '',
-                nrodoc:item['NRODOC'] ? item['NRODOC'] : '',
-                buildid:'1610987210'
+                names:item['NOMBRE 2'] ? `${item['NOMBRE 1']} ${item['NOMBRE 2']}` : item['NOMBRE 1'],
+                lastnamefirst: item['APELLIDO PATERNO'] ? item['APELLIDO PATERNO'] : '',
+                lastnamesecond: item['APELLIDO MATERNO'] ? item['APELLIDO MATERNO'] : '',
+                typedoc:"DNI",
+                enterprise:item['EMPRESA'] ? item['EMPRESA'] : '',
+                enterpriseruc: ruc.toString(),
+                nrodoc:nrodoc.toString(),
+                buildid:'1613055395',
+                datecessationwork:fechacese,
+                expirationdatedni: dniexce
             }
-            firebase.database().ref('/obreros/' + dni).set(newjson).then(res => {
-                console.log(res)
+            console.log(newjson)
+            firebase.database().ref('/obreros/' + nrodoc).set(newjson).then(res => {
+                console.log('res',res)
             }).catch(ex => {
                 console.log(ex)
             })

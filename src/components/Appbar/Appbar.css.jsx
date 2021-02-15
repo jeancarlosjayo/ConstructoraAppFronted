@@ -15,6 +15,12 @@ export const useStylesAppbar = makeStyles((theme) => ({
     },
     appbar: {
       width: `calc(100%-${240}px)`,
+      height:'80px',
+      display:'flex',
+      justifyContent:'center',
+      borderRadius:'0px 0px 30px 30px',
+      fontFamily: "'Boogaloo', 'Helvetica', 'Arial',cursive",
+      marginBottom:40
     },
     banner_title:{
         width:'186px',

@@ -43,9 +43,9 @@ import ObraExcel from './views/ObraExcel'
   const [ open, setOpen ] = useState( false )
 
  
-  window.onbeforeunload = function() {
-    return "Leaving this page will reset the wizard";
-  };
+  // window.onbeforeunload = function() {
+  //   return "Leaving this page will reset the wizard";
+  // };
 
 
   return (
@@ -110,6 +110,9 @@ import ObraExcel from './views/ObraExcel'
               <Route exact path="/codigo-extension" component={CodeExtension}></Route>
               <Redirect to="/lista-obras"></Redirect>
             </Switch>
+            <div>
+              sadsad
+            </div>
             <Drawe
             open={open}
             setOpen={setOpen}></Drawe>
