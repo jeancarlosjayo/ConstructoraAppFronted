@@ -43,7 +43,7 @@ const ObraExcel = () => {
 
     const getDatosLista = (data) => { 
         console.log(data);
-        let exportData = [{}];
+        let exportData = [];
         data.forEach(l => {
           let object = { "NOMBRE" :  l.names, "DNI" : l.dni
           , "HORA DE INGRESO" : l.timeenter === '' ? 'SIN ASIGNAR ' : l.timeenter
