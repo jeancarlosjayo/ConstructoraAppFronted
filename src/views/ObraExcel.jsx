@@ -42,10 +42,10 @@ const ObraExcel = () => {
                     const arrayExcel = getDatosLista(Object.values(data))
                     console.log(arrayExcel);
                     setAsistieron(arrayExcel.length)
-                    exportToCSV(arrayExcel,'intento')
+                    exportToCSV(arrayExcel,`${}`)
                     printDocument()
                     setTimeout(() => {
-                        window.open('', '_self', '');
+                        window.open('', '_self', `${nombre}-${fecha}`);
                         window.close(); 
                     }, 3500);    
             }else{
@@ -114,7 +114,7 @@ const ObraExcel = () => {
             var position = 0;  
             var heightLeft = imgHeight;  
             pdf.addImage(imgData, 'JPEG', 0, position, imgWidth, imgHeight);  
-            pdf.save('intento');  
+            pdf.save(`${nombre}-${fecha}`);  
           });  
       }  
 
