@@ -38,10 +38,10 @@ const ObraExcel = () => {
                     setAsistieron(arrayExcel.length)
                     printDocument()
                     exportToCSV(arrayExcel,`${nombre}-${fecha}`)
-                    // setTimeout(() => {
-                    //     window.open('', '_self', '');
-                    //     window.close(); 
-                    // }, 8000);    
+                    setTimeout(() => {
+                        window.open('', '_self', '');
+                        window.close(); 
+                    }, 8000);    
             }else{
                 console.log('error')
                 return null
@@ -171,7 +171,7 @@ const ObraExcel = () => {
              </div>
             
         </div>
-        <h3 style={{textAlign:'center'}}>Descargando excel y pdf ...</h3>
+        {/* <h3 style={{textAlign:'center'}}>Descargando excel y pdf ...</h3> */}
         </>
     )
 }
