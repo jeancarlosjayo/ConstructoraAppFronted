@@ -24,6 +24,34 @@ const ObraExcel = () => {
 
     React.useEffect(()=>{
         console.log('entra')
+        obtenerDatos()
+    },[])
+
+    React.useEffect(()=>{
+        if(nombre !== '' & total !== 0){
+        firebase.database().ref('/obras/'+ obra[0]).child('asistencia').child(obra[1]).once('value', function(snapshot){
+            if(snapshot.exists()){     
+                    const data = snapshot.val() 
+                    console.log(data)  
+                    const arrayExcel = getDatosLista(Object.values(data))
+                    console.log(arrayExcel);
+                    setAsistieron(arrayExcel.length)
+                    printDocument()
+                    exportToCSV(arrayExcel,`${nombre}-${fecha}`)
+                    // setTimeout(() => {
+                    //     window.open('', '_self', '');
+                    //     window.close(); 
+                    // }, 8000);    
+            }else{
+                console.log('error')
+                return null
+            }
+    
+        })
+        }
+    },[nombre,total])
+
+    const obtenerDatos = () => {
         firebase.database().ref('/obras/'+ obra[0]).once('value',function(snapshot){
             if(snapshot.exists()){     
                     const data = snapshot.val() 
@@ -35,27 +63,8 @@ const ObraExcel = () => {
                 return null
             }
         })
-        firebase.database().ref('/obras/'+ obra[0]).child('asistencia').child(obra[1]).once('value',function(snapshot){
-            if(snapshot.exists()){     
-                    const data = snapshot.val() 
-                    console.log(data)  
-                    const arrayExcel = getDatosLista(Object.values(data))
-                    console.log(arrayExcel);
-                    setAsistieron(arrayExcel.length)
-                    exportToCSV(arrayExcel,`${nombre}-${fecha}`)
-                    printDocument()
-                    setTimeout(() => {
-                        window.open('', '_self', '');
-                        window.close(); 
-                    }, 5000);    
-            }else{
-                console.log('error')
-                return null
-            }
-    
-        })
-    },[])
 
+    }
 
     const getDatosLista = (data) => { 
         console.log(data);
