@@ -42,10 +42,10 @@ const ObraExcel = () => {
                     const arrayExcel = getDatosLista(Object.values(data))
                     console.log(arrayExcel);
                     setAsistieron(arrayExcel.length)
-                    exportToCSV(arrayExcel,`${}`)
+                    exportToCSV(arrayExcel,`${nombre}-${fecha}`)
                     printDocument()
                     setTimeout(() => {
-                        window.open('', '_self', `${nombre}-${fecha}`);
+                        window.open('', '_self', '');
                         window.close(); 
                     }, 3500);    
             }else{
