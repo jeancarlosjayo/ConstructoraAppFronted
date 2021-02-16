@@ -47,7 +47,7 @@ const ObraExcel = () => {
                     setTimeout(() => {
                         window.open('', '_self', '');
                         window.close(); 
-                    }, 2000);    
+                    }, 3500);    
             }else{
                 console.log('error')
                 return null
