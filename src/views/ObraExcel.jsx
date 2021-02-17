@@ -9,6 +9,7 @@ import * as XLSX from 'xlsx';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';  
 import { Bar } from 'react-chartjs-2'
+import { Button } from '@material-ui/core';
 
 const ObraExcel = () => {
 
@@ -21,6 +22,7 @@ const ObraExcel = () => {
     const [ asistieron, setAsistieron] = React.useState(0)
     const [ nombre, setNombre] = React.useState('')
     const [ fecha, setFecha ] = React.useState(fechaTimeStamp(new Date((parseInt(obra[1]))*1000)))
+    const [ arrayExcel,setArrayExcel ] = React.useState([])
 
     React.useEffect(()=>{
         console.log('entra')
@@ -35,13 +37,14 @@ const ObraExcel = () => {
                     console.log(data)  
                     const arrayExcel = getDatosLista(Object.values(data))
                     console.log(arrayExcel);
+                    setArrayExcel(getDatosLista(Object.values(data)))
                     setAsistieron(arrayExcel.length)
-                    printDocument()
-                    exportToCSV(arrayExcel,`${nombre}-${fecha}`)
-                    setTimeout(() => {
-                        window.open('', '_self', '');
-                        window.close(); 
-                    }, 8000);    
+                    // printDocument()
+                    // exportToCSV(arrayExcel,`${nombre}-${fecha}`)
+                    // setTimeout(() => {
+                    //     window.open('', '_self', '');
+                    //     window.close(); 
+                    // }, 8000);    
             }else{
                 console.log('error')
                 return null
@@ -50,6 +53,8 @@ const ObraExcel = () => {
         })
         }
     },[nombre,total])
+
+    console.log(arrayExcel)
 
     const obtenerDatos = () => {
         firebase.database().ref('/obras/'+ obra[0]).once('value',function(snapshot){
@@ -75,7 +80,7 @@ const ObraExcel = () => {
           ,  "HORA DE SALIDA" : l.timeexit === '' ? 'SIN ASGINAR' : l.timeexit
           , "CATEGORIA": l.category === '' ? 'SIN ASGINAR' : l.category
           , "OCUPACION": l.charge === '' ? 'SIN ASGINAR' : l.charge
-          , "PLANILLA" : l.playroll === '' ? 'SIN ASGINAR' : l.playroll
+          , "PLANILLA" : l.payroll === '' ? 'SIN ASGINAR' : l.payroll
           , "FECHA DE NACIMIENTO" : l.dayborn === '' ? 'SIN ASGINAR' : l.dayborn
           , "FECHA DE VENCIMIENTO DE DNI" : l.expirationdatedni === '' ? 'SIN ASGINAR' : l.expirationdatedni
           , "EMPRESA" : l.enterprise === '' ? 'SIN ASGINAR' : l.enterprise
@@ -102,11 +107,12 @@ const ObraExcel = () => {
     const fileType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
     const fileExtension = '.xlsx';
 
-    const exportToCSV = (csvData, fileName) => {
-        const ws = XLSX.utils.json_to_sheet(csvData);
+    const exportToCSV = () => {
+        const ws = XLSX.utils.json_to_sheet(arrayExcel);
         const wb = { Sheets: { 'data': ws }, SheetNames: ['data'] };
         const excelBuffer = XLSX.write(wb, { bookType: 'xlsx', type: 'array', });
         const data = new Blob([excelBuffer], {type: fileType});
+        const fileName = `${nombre}-${fecha}`
         FileSaver.saveAs(data, fileName + fileExtension);
     }
 
@@ -126,8 +132,6 @@ const ObraExcel = () => {
             pdf.save(`${nombre}-${fecha}`);  
           });  
       }  
-
-
 
     return (
         <>
@@ -172,6 +176,14 @@ const ObraExcel = () => {
             
         </div>
         {/* <h3 style={{textAlign:'center'}}>Descargando excel y pdf ...</h3> */}
+        {
+            arrayExcel !== [] &&
+            <div  style={{maxWidth:'1000px',margin:'auto',padding:'20px',display:'flex',justifyContent:'space-around',alignItems:'center'}}>
+            <Button onClick={exportToCSV} color="primary" variant="outlined">DESCARGAR EXCEL</Button>
+            <Button onClick={printDocument} color="primary" variant="outlined">DESCARGAR PDF</Button>
+            </div>
+        }
+        
         </>
     )
 }
