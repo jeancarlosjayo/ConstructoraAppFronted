@@ -24,6 +24,8 @@ import CodeExtension from './views/CodeExtension'
 import { workState } from './state/workState'
 import workReducer from './reducer/workReducer'
 import ObraExcel from './views/ObraExcel'
+import EmpresaReducer from './reducer/empresasReducer'
+import { empresasContext } from './context/empresasContext'
 
   const App = () => {
 
@@ -47,12 +49,29 @@ import ObraExcel from './views/ObraExcel'
   //   return "Leaving this page will reset the wizard";
   // };
 
+  const init1 =()=>{
+    return JSON.parse(sessionStorage.getItem('empresas'))||
+    {
+      empresas:[]
+    }
+  }
+
+   //se usa reducer para carrito de compras
+   const [empresaArray, dispatchEmpresa] = useReducer(EmpresaReducer, {},init1 )
+
+   //se actualiza el carrito de compras 
+   useEffect(() => {
+     sessionStorage.setItem('empresas',JSON.stringify(empresaArray))
+   }, [empresaArray])
+
+
 
   return (
     <ThemeProvider theme={theme}>
     <CssBaseline>
     <userContext.Provider value={{userinit,dispatch}}>
     <workContext.Provider value={{workinit,dispatchwork}}>
+    <empresasContext.Provider value={{empresaArray,dispatchEmpresa}}>
     <Router>
         <div>
           {
@@ -159,6 +178,7 @@ import ObraExcel from './views/ObraExcel'
           {/* </Switch> */}
         </div>
     </Router>
+    </empresasContext.Provider>
     </workContext.Provider>
     </userContext.Provider>
     </CssBaseline>
