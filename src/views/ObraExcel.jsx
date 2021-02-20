@@ -301,6 +301,15 @@ const ObraExcel = () => {
             legend: {
               display: false,
             },
+            scales: {
+              yAxes: [
+                {
+                  ticks: {
+                    beginAtZero: true,
+                  },
+                },
+              ],
+            },
           }}
         />
         <div style={{ display: "flex", justifyContent: "space-around" }}>
@@ -378,6 +387,15 @@ const ObraExcel = () => {
                     options={{
                       legend: {
                         display: false,
+                      },
+                      scales: {
+                        yAxes: [
+                          {
+                            ticks: {
+                              beginAtZero: true,
+                            },
+                          },
+                        ],
                       },
                     }}
                   />
