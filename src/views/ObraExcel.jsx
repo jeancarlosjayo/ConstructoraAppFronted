@@ -64,7 +64,7 @@ const ObraExcel = () => {
   };
 
   //Context que trae las empresas guardadas , empieza en []
-  const {empresaArray, dispatchEmpresa} = React.useContext(empresasContext)
+  const { empresaArray, dispatchEmpresa } = React.useContext(empresasContext);
 
   //obtener empresas
   const obtenerDataPorEmpresas = () => {
@@ -75,17 +75,17 @@ const ObraExcel = () => {
       .once("value", function (snapshot) {
         if (snapshot.exists()) {
           const data = snapshot.val().enterprises;
-          //Si tiene recorremos la data 
+          //Si tiene recorremos la data
           if (data) {
             for (const item of Object.values(data)) {
-              //Asigamos los valores a un objeto 
+              //Asigamos los valores a un objeto
               let objtEmpresa = {};
               const nameEnterprises = item.enterprise;
               const numberTotal = item.numbuilders;
               objtEmpresa.name = nameEnterprises;
               objtEmpresa.total = numberTotal;
               //   console.log(objtEmpresa);
-              //Vamos a contar cuantos asistieron 
+              //Vamos a contar cuantos asistieron
               firebase
                 .database()
                 .ref("/obras/" + obra[0])
@@ -104,20 +104,21 @@ const ObraExcel = () => {
                           countAsistencia = countAsistencia + 1;
                         }
                       }
-                      //agregamos el contador al objeto 
+                      //agregamos el contador al objeto
                       objtEmpresa.count = countAsistencia;
-                     //   console.log(objtEmpresa);
-                     //Evaluamos para que no se repita las empresas en el Array del context
-                      const exist = empresaArray.empresas.some(item => item.name === objtEmpresa.name)
-                      console.log(exist)
+                      //   console.log(objtEmpresa);
+                      //Evaluamos para que no se repita las empresas en el Array del context
+                      const exist = empresaArray.empresas.some(
+                        (item) => item.name === objtEmpresa.name
+                      );
+                      console.log(exist);
                       //Si no se repite realizamos el llenado de la empresas al Array de empresas
-                      if(!exist){
+                      if (!exist) {
                         dispatchEmpresa({
-                            type:'añadir',
-                            payload: objtEmpresa
-                        })
+                          type: "añadir",
+                          payload: objtEmpresa,
+                        });
                       }
-                     
                     }
                   }
                 });
@@ -165,16 +166,16 @@ const ObraExcel = () => {
 
   const getDatosListaEmpresa = (data) => {
     let exportData = [];
-    if(data !== []){
-        data.forEach((l) => {
-            let object = {
-              'EMPRESA': l.name,
-              'ASISTIERON': l.count,
-              "FALTARON": parseInt(l.total) - l.count,
-              "TOTAL": parseInt(l.total)
-            };
-            exportData.push(object);
-          });
+    if (data !== []) {
+      data.forEach((l) => {
+        let object = {
+          EMPRESA: l.name,
+          ASISTIERON: l.count,
+          FALTARON: parseInt(l.total) - l.count,
+          TOTAL: parseInt(l.total),
+        };
+        exportData.push(object);
+      });
     }
     return exportData;
   };
@@ -186,8 +187,13 @@ const ObraExcel = () => {
   //convertir a excel y descargar
   const exportToCSV = () => {
     const ws = XLSX.utils.json_to_sheet(arrayExcel);
-    const we = XLSX.utils.json_to_sheet(getDatosListaEmpresa(empresaArray.empresas));
-    const wb = { Sheets: { Listado_General: ws , Listado_Empresas : we }, SheetNames: ["Listado_General", "Listado_Empresas"] };
+    const we = XLSX.utils.json_to_sheet(
+      getDatosListaEmpresa(empresaArray.empresas)
+    );
+    const wb = {
+      Sheets: { Listado_General: ws, Listado_Empresas: we },
+      SheetNames: ["Listado_General", "Listado_Empresas"],
+    };
     const excelBuffer = XLSX.write(wb, { bookType: "xlsx", type: "array" });
     const data = new Blob([excelBuffer], { type: fileType });
     const fileName = `${nombre}-${fecha}`;
@@ -248,7 +254,6 @@ const ObraExcel = () => {
 
   return (
     <>
-
       {arrayExcel !== [] && (
         <div
           style={{
@@ -333,82 +338,94 @@ const ObraExcel = () => {
         <br></br>
 
         <Grid container>
-        {
-                empresaArray.empresas === [] &&
-                <h1>Esta obra no tiene empresas asignadas</h1>
-        }
-        {empresaArray.empresas !== [] &&
-        empresaArray.empresas.map((item) => {
-          return <Grid item md={6}>
-          <h3 style={{textAlign:'center'}}>{item.name}</h3>
-          <Bar
-            height={400}
-            width={900}
-            data={{
-              labels: ["Asistieron", "Faltaron" ,"Total"],
-              datasets: [
-                {
-                  data: [item.count, parseInt(item.total) - item.count, parseInt(item.total),1, 5, 20],
-                  backgroundColor: [
-                    "rgba(255, 99, 132, 0.2)",
-                    "rgba(200, 162, 235, 0.2)",
-                    "rgba(54, 162, 235, 0.2)",
-                  ],
-                  borderColor: [
-                    "rgba(255, 99, 132, 1)",
-                    "rgba(200, 162, 235, 1)",
-                    "rgba(54, 162, 235, 1)",
-                  ],
-                  borderWidth: 1,
-                },
-              ],
-            }}
-            options={{
-              legend: {
-                display: false,
-              },
-            }}
-          />
-          <div style={{ display: "flex", justifyContent: "space-around" }}>
-            <div style={{ display: "flex", alignItems: "center" }}>
-              <div
-                style={{
-                  background: "rgba(255, 99, 132, 0.2)",
-                  border: "1px solid rgba(255, 99, 132, 1)",
-                  height: "20px",
-                  width: "40px",
-                  marginRight: 5,
-                }}
-              ></div>
-              <h3>ASISTIERON : {item.count} Personas</h3>
-            </div>
-            <div style={{ display: "flex", alignItems: "center" }}>
-              <div
-                style={{
-                  background: "rgba(200, 162, 235, 0.2)",
-                  border: "1px solid rgba(200, 162, 235, 1)",
-                  height: "20px",
-                  width: "40px",
-                  marginRight: 5,
-                }}
-              ></div>
-              <h3>FALTARON : {parseInt(item.total) - item.count} Personas</h3>
-            </div>
-            <div style={{ display: "flex", alignItems: "center" }}>
-              <div
-                style={{
-                  background: "rgba(54, 162, 235, 0.2)",
-                  border: "1px solid rgba(54, 162, 235, 1)",
-                  height: "20px",
-                  width: "40px",
-                  marginRight: 5,
-                }}
-              ></div>
-              <h3>SE ESPERABA : {parseInt(item.total)} Personas</h3>
-            </div>
-          </div>
-        </Grid>;
-        })}
+          {empresaArray.empresas === [] && (
+            <h1>Esta obra no tiene empresas asignadas</h1>
+          )}
+          {empresaArray.empresas !== [] &&
+            empresaArray.empresas.map((item) => {
+              return (
+                <Grid item md={6}>
+                  <h3 style={{ textAlign: "center" }}>{item.name}</h3>
+                  <Bar
+                    height={400}
+                    width={900}
+                    data={{
+                      labels: ["Asistieron", "Faltaron", "Total"],
+                      datasets: [
+                        {
+                          data: [
+                            item.count,
+                            parseInt(item.total) - item.count,
+                            parseInt(item.total),
+                            1,
+                            5,
+                            20,
+                          ],
+                          backgroundColor: [
+                            "rgba(255, 99, 132, 0.2)",
+                            "rgba(200, 162, 235, 0.2)",
+                            "rgba(54, 162, 235, 0.2)",
+                          ],
+                          borderColor: [
+                            "rgba(255, 99, 132, 1)",
+                            "rgba(200, 162, 235, 1)",
+                            "rgba(54, 162, 235, 1)",
+                          ],
+                          borderWidth: 1,
+                        },
+                      ],
+                    }}
+                    options={{
+                      legend: {
+                        display: false,
+                      },
+                    }}
+                  />
+                  <div
+                    style={{ display: "flex", justifyContent: "space-around" }}
+                  >
+                    <div style={{ display: "flex", alignItems: "center" }}>
+                      <div
+                        style={{
+                          background: "rgba(255, 99, 132, 0.2)",
+                          border: "1px solid rgba(255, 99, 132, 1)",
+                          height: "20px",
+                          width: "40px",
+                          marginRight: 5,
+                        }}
+                      ></div>
+                      <h3>ASISTIERON : {item.count} Personas</h3>
+                    </div>
+                    <div style={{ display: "flex", alignItems: "center" }}>
+                      <div
+                        style={{
+                          background: "rgba(200, 162, 235, 0.2)",
+                          border: "1px solid rgba(200, 162, 235, 1)",
+                          height: "20px",
+                          width: "40px",
+                          marginRight: 5,
+                        }}
+                      ></div>
+                      <h3>
+                        FALTARON : {parseInt(item.total) - item.count} Personas
+                      </h3>
+                    </div>
+                    <div style={{ display: "flex", alignItems: "center" }}>
+                      <div
+                        style={{
+                          background: "rgba(54, 162, 235, 0.2)",
+                          border: "1px solid rgba(54, 162, 235, 1)",
+                          height: "20px",
+                          width: "40px",
+                          marginRight: 5,
+                        }}
+                      ></div>
+                      <h3>SE ESPERABA : {parseInt(item.total)} Personas</h3>
+                    </div>
+                  </div>
+                </Grid>
+              );
+            })}
         </Grid>
       </div>
     </>

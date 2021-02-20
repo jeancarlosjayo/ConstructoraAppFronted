@@ -26,6 +26,7 @@ import workReducer from './reducer/workReducer'
 import ObraExcel from './views/ObraExcel'
 import EmpresaReducer from './reducer/empresasReducer'
 import { empresasContext } from './context/empresasContext'
+import ObraMensual from './views/ObraMensual'
 
   const App = () => {
 
@@ -79,6 +80,7 @@ import { empresasContext } from './context/empresasContext'
             <Switch>
               <Route exact path="/login" component={Login}></Route>
               <Route exact path="/descargarobraexcel/:id" component={ObraExcel}></Route>
+              <Route exact path="/descargarobramensual/:id" component={ObraMensual}></Route>
               <Redirect to="/login"></Redirect>
             </Switch>
           }
