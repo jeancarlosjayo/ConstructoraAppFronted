@@ -26,7 +26,7 @@ export const useStylesTableForm = makeStyles((theme) => ({
         borderRadius: "2px",
       },
       "& .MuiTableSortLabel-root:hover":{
-        color:'white'
+        color:'#000000'
       }
     },
     table: {

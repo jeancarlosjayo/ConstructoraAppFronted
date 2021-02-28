@@ -1,15 +1,15 @@
-import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, TableSortLabel, withStyles } from '@material-ui/core';
+import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, TableSortLabel, Typography, withStyles } from '@material-ui/core';
 import React from 'react'
 import { useStylesTableForm } from './TableCode.css';
 
 //Estilos de la tabla del encabezado y contenido
 const StyledTableCell = withStyles((theme) => ({
     head: {
-      backgroundColor: theme.palette.primary.main,
-      color: "white",
+      // backgroundColor: theme.palette.primary.main,
+      // color: "white",
       minWidth: "165px",
       "&:hover":{
-        color: "white",
+        color: "#000000",
       }
     },
     body: {
@@ -20,7 +20,7 @@ const StyledTableCell = withStyles((theme) => ({
   const StyledTableRow = withStyles((theme) => ({
     root: {
       "&:nth-of-type(odd)": {
-        backgroundColor: theme.palette.action.hover,
+        backgroundColor: 'white'
       },
     },
   }))(TableRow);
@@ -69,7 +69,7 @@ const StyledTableCell = withStyles((theme) => ({
   const headCells = [
     {id: "id",numeric: true,disablePadding: false,label: "ID"},
     {id: "value",numeric: true,disablePadding: false,label: "Codigo"},
-    { id: "state", numeric: false, disablePadding: false, label: "Estado" },
+    // { id: "state", numeric: false, disablePadding: false, label: "Estado" },
     { id: "buildid", numeric: false, disablePadding: false, label: "ID Obra" },
     { id: "dateinit", numeric: false, disablePadding: false, label: "Dia Inicio" },
     { id: "datefinish", numeric: false, disablePadding: false, label: "Dia Final" },
@@ -124,7 +124,7 @@ const TableCode = ({data}) => {
         const [order, setOrder] = React.useState("asc");
         const [orderBy, setOrderBy] = React.useState("calories");
         const [page, setPage] = React.useState(0);
-        const [rowsPerPage, setRowsPerPage] = React.useState(5);
+        const [rowsPerPage, setRowsPerPage] = React.useState(10);
       
         //handle change
         const handleRequestSort = (event, property) => {
@@ -185,7 +185,7 @@ const TableCode = ({data}) => {
                         return (
                           <StyledTableRow tabIndex={-1} key={index}>
                             <StyledTableCell align="center">
-                              {row.id}
+                              <Typography color="secondary" style={{fontWeight:600}}>{row.id}</Typography>
                             </StyledTableCell>
                             <StyledTableCell
                               component="th"
@@ -196,9 +196,9 @@ const TableCode = ({data}) => {
                             >
                               {row.value}
                             </StyledTableCell>
-                            <StyledTableCell align="center">
+                            {/* <StyledTableCell align="center">
                               {row.state}
-                            </StyledTableCell>
+                            </StyledTableCell> */}
                             <StyledTableCell align="center">
                               {row.buildid}
                             </StyledTableCell>

@@ -4,5 +4,8 @@ export const userState = {
     email:null,
     name:null,
     lastname:null,
-    uid:null
+    uid:null,
+    profilepic:'',
+    dayofbirth:'',
+    cellphone:''
 }

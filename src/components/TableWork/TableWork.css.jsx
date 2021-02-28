@@ -1,83 +1,89 @@
 import { makeStyles } from "@material-ui/core";
 
 export const useStylesTableWork = makeStyles((theme) => ({
-    root: {
-      width: "100%",
-      fontSize: "12px !important",
+  root: {
+    width: "100%",
+    fontSize: "12px !important",
+  },
+  paper: {
+    width: "100%",
+    marginBottom: theme.spacing(2),
+  },
+  tableContainerStyle: {
+    "&::-webkit-scrollbar": {
+      height: "9px",
+      width: "50px",
     },
-    paper: {
-      width: "100%",
-      marginBottom: theme.spacing(2),
+    "&::-webkit-scrollbar-thumb": {
+      backgroundColor: theme.palette.primary.main,
+      borderRadius: "0px",
     },
-    tableContainerStyle: {
-      "&::-webkit-scrollbar": {
-        height: "9px",
-        width: "50px",
-      },
-      "&::-webkit-scrollbar-thumb": {
-        backgroundColor: theme.palette.primary.main,
-        borderRadius: "0px",
-      },
-      "&::-webkit-scrollbar-thumb:hover": {
-        backgroundColor: "#324463",
-      },
-      "&::-webkit-scrollbar-track": {
-        background: "#EBEBEB",
-        borderRadius: "2px",
-      },
-      "& .MuiTableSortLabel-root:hover":{
-        color:'white'
-      },
-      "& .MuiTableSortLabel-root.MuiTableSortLabel-active":{
-        color:'white'
-      }
+    "&::-webkit-scrollbar-thumb:hover": {
+      backgroundColor: "#324463",
     },
-    table: {
-      minWidth: 750,
+    "&::-webkit-scrollbar-track": {
+      background: "#EBEBEB",
+      borderRadius: "2px",
     },
-    visuallyHidden: {
-      border: 0,
-      clip: "rect(0 0 0 0)",
-      height: 1,
-      margin: -1,
-      overflow: "hidden",
-      padding: 0,
-      position: "absolute",
-      top: 20,
-      width: 1,
+    "& .MuiTableSortLabel-root:hover": {
+      color: "#000000",
     },
-    section_buscar: {
-      display: "flex",
-      justifyContent: "flex-end",
-      alignItems: "center",
-      float: "right",
-      "@media(max-width:702px)": {
-        justifyContent: "center",
-        float: "none",
-      },
+    "& .MuiTableSortLabel-root.MuiTableSortLabel-active": {
+      color: "#000000",
     },
-    btn_search: {
-      border: "none",
-      backgroundColor: "#02AAB0",
-      height: "40px",
-      margin: "7px",
-      borderRadius: "12px",
-      color: "white",
-      outline: "none",
-      "&:hover": {
-        backgroundColor: "#00858a",
-      },
-      "&:active": {
-        position: "relative",
-        top: "1px",
-      },
+  },
+  table: {
+    minWidth: 750,
+  },
+  visuallyHidden: {
+    border: 0,
+    clip: "rect(0 0 0 0)",
+    height: 1,
+    margin: -1,
+    overflow: "hidden",
+    padding: 0,
+    position: "absolute",
+    top: 20,
+    width: 1,
+  },
+  section_buscar: {
+    display: "flex",
+    justifyContent: "flex-end",
+    alignItems: "center",
+    float: "right",
+    "@media(max-width:702px)": {
+      justifyContent: "center",
+      float: "none",
     },
-    typography: {
-      padding: theme.spacing(2),
+  },
+  btn_search: {
+    border: "none",
+    backgroundColor: "#02AAB0",
+    height: "40px",
+    margin: "7px",
+    borderRadius: "12px",
+    color: "white",
+    outline: "none",
+    "&:hover": {
+      backgroundColor: "#00858a",
     },
-  
-    btnlink: {
-      color: "#2F1A7E",
-      textTransform: "initial",
+    "&:active": {
+      position: "relative",
+      top: "1px",
     },
-  }));
+  },
+  typography: {
+    padding: theme.spacing(2),
+  },
+
+  btnlink: {
+    color: "#2F1A7E",
+    textTransform: "initial",
+  },
+  headerTable: {
+    color: "red",
+    "&:hover": {
+      color: "red",
+    },
+  },
+}));

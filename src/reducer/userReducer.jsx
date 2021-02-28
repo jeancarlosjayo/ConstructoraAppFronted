@@ -31,7 +31,10 @@ const  userReducer  = (state = {}, action) => {
                 ...state,
                 type: action.payload.type,
                 name: action.payload.name,
-                email: action.payload.email
+                email: action.payload.email,
+                profilepic:action.payload.profilepic,
+                dayofbirth:action.payload.dayofbirth,
+                cellphone:action.payload.cellphone
             }
         
         default :
