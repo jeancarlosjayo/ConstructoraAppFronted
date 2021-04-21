@@ -117,7 +117,7 @@ const FormLogin = () => {
         <div className={classes.form_login}>
           <div className={classes.form_title}>
             <Typography variant="h5" className={classes.form_text_title}>
-              Bienvenido a tu App Cosntructora
+              Bienvenido a tu App Constructora
             </Typography>
           </div>
           <br></br>
